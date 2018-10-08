@@ -1,12 +1,10 @@
 var poke_name = document.getElementById('name')
 var poke_img = document.getElementById('img')
-// var mew_name = document.getElementById('mew_name')
 var stat_hp = document.getElementById('hp')
 var stat_att = document.getElementById('at')
 var stat_def = document.getElementById('def')
-// var macchampImg = document.getElementById('macimg')
-// var mightImg = document.getElementById('mighimg')
-var next= document.getElementById('next')
+var next = document.getElementById('next')
+var back = document.getElementById('back')
 
 
 var trainer = []
@@ -39,9 +37,9 @@ class Pokemon {
       poke_name.innerHTML = that.name;
       poke_img.style.backgroundImage = "url(" + that.img + ")"
       poke_img.style.backgroundSize = '100% 100%'
-      stat_hp.innerHTML = that.hp
-      stat_att.innerHTML = that.att
-      stat_def.innerHTML = that.def
+      stat_hp.innerHTML ="hp: " + that.hp
+      stat_att.innerHTML ="attack: " + that.att
+      stat_def.innerHTML ="defense: " + that.def
 
       // console.log(name);
       // console.log(hp);
@@ -68,15 +66,33 @@ next.addEventListener('click',function() {
   }else{
     count++
   }
-  // console.log(trainer[count].hp);
-  stat_hp.innerHTML=trainer[count].hp;
+  // stat_hp.innerHTML= trainer[count].hp;
   poke_name.innerHTML = trainer[count].name;
   poke_img.style.backgroundImage = "url(" + trainer[count].img + ")"
   // poke_img.style.backgroundSize = '100% 100%'
-  stat_hp.innerHTML = trainer[count].hp
-  stat_att.innerHTML = trainer[count].att
-  stat_def.innerHTML = trainer[count].def
+  stat_hp.innerHTML = "hp: " + trainer[count].hp
+  stat_att.innerHTML = "attack: " + trainer[count].att
+  stat_def.innerHTML = "defense: " + trainer[count].def
 })
+
+back.addEventListener('click', function() {
+  if (count == 0 ) {
+    count = trainer.length - 1
+  }else{
+    count--
+  }
+  stat_hp.innerHTML= trainer[count].hp;
+  poke_name.innerHTML = trainer[count].name;
+  poke_img.style.backgroundImage = "url(" + trainer[count].img + ")"
+  // poke_img.style.backgroundSize = '100% 100%'
+  stat_hp.innerHTML = "hp: " + trainer[count].hp
+  stat_att.innerHTML = "attack: " + trainer[count].att
+  stat_def.innerHTML = "defense: " + trainer[count].def
+})
+
+
+
+
 
 
 
