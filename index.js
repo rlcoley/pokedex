@@ -17,7 +17,10 @@ class Pokemon {
     this.att;
     this.def;
     this.abil = [];
-    this.moves = []
+    this.moves = [];
+    this.specialDefense;
+    this.specialAttack;
+    this.speed;
     this.getPokemon(pokenumber)
   }
   getPokemon(pokenumber) {
@@ -26,6 +29,9 @@ class Pokemon {
     success: function(pokemonInfo) {
       console.log(pokemonInfo);
       that.name = pokemonInfo.name
+      that.specialDefense = pokemonInfo.stats[1].base_stat
+      that.specialAttack = pokemonInfo.stats[2].base_stat
+      that.speed= pokemonInfo.stats[0].base_stat
       that.hp = pokemonInfo.stats[5].base_stat
       that.att = pokemonInfo.stats[4].base_stat
       that.def = pokemonInfo.stats[3].base_stat
@@ -35,6 +41,11 @@ class Pokemon {
       for(let i = 0;i<pokemonInfo.abilities.length;i++){
         that.abil.push(pokemonInfo.abilities[i].ability.name)
       }
+      for(let i = 0;i<5;i++){
+        that.moves.push(pokemonInfo.moves[i].move.name)
+      }
+      console.log(that.moves)
+      console.log("speed: "+that.speed+" special d: "+that.specialDefense+" special a: "+that.specialAttack)
       poke_name.innerHTML = that.name;
       poke_img.style.backgroundImage = "url(" + that.img + ")"
       poke_img.style.backgroundSize = '100% 100%'
@@ -42,8 +53,23 @@ class Pokemon {
       stat_att.innerHTML ="attack: " + that.att
       stat_def.innerHTML ="defense: " + that.def
 
+
+      // for (var i = 0; i <5; i++) {
+      //   console.log(that.moves[i]pokemonInfo.moves.move.name);
+      // }
+
+      // var movesString = "";
+      // for (var i = 0; i < 5; i++) {
+      //   if (i==that.moves.length-1) {
+      //       movesString += that.moves[i]pokemonInfo.move.name+"!"
+      //   }else{
+      //     movesString += that.moves[i]pokemonInfo.move.name+", "
+      //   }
+      // }
+      // moves.innerHTML = "moves: "+ movesString;
+
+
       console.log(that.abil);
-      abilities.innerHTML = "abilities: "+ ableString;
       var ableString = "";
       for (var i = 0; i < that.abil.length; i++) {
         if (i==that.abil.length-1) {
@@ -52,9 +78,8 @@ class Pokemon {
           ableString += that.abil[i]+", "
         }
       }
-      // for (var i = 0; i <5; i++) {
-      //   that.moves.push()
-      // }
+      abilities.innerHTML = "abilities: "+ ableString;
+
     }
   })
  }
