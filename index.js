@@ -5,35 +5,36 @@ var stat_att = document.getElementById('at')
 var stat_def = document.getElementById('def')
 var next = document.getElementById('next')
 var back = document.getElementById('back')
-
+var abilities = document.getElementById('abilities')
+var moves = document.getElementById('moves')
 
 var trainer = []
 var count = 0
 
-// {url:"https://fizal.me/pokeapi/api/"+ x +".json"
 class Pokemon {
   constructor(pokenumber) {
     this.hp;
     this.att;
     this.def;
-    this.abil;
+    this.abil = [];
+    this.moves = []
     this.getPokemon(pokenumber)
   }
-  // hp = response.stats[5].base_stat
-  // att = response.stats[4].base_stat
-  // def = response.stats[3].base_stat
-  // abil = []
   getPokemon(pokenumber) {
     var that = this;
     $.ajax({url:"https://fizal.me/pokeapi/api/"+ pokenumber +".json",
     success: function(pokemonInfo) {
+      console.log(pokemonInfo);
       that.name = pokemonInfo.name
       that.hp = pokemonInfo.stats[5].base_stat
       that.att = pokemonInfo.stats[4].base_stat
       that.def = pokemonInfo.stats[3].base_stat
       that.img = pokemonInfo.sprites.front_default
-      that.abil = []
-
+      // that.moves = pokemonInfo.moves[0].move.name
+      // that.abil = pokemonInfo.abilities
+      for(let i = 0;i<pokemonInfo.abilities.length;i++){
+        that.abil.push(pokemonInfo.abilities[i].ability.name)
+      }
       poke_name.innerHTML = that.name;
       poke_img.style.backgroundImage = "url(" + that.img + ")"
       poke_img.style.backgroundSize = '100% 100%'
@@ -41,11 +42,19 @@ class Pokemon {
       stat_att.innerHTML ="attack: " + that.att
       stat_def.innerHTML ="defense: " + that.def
 
-      // console.log(name);
-      // console.log(hp);
-      // console.log(att);
-      // console.log(def);
-      // console.log(img);
+      console.log(that.abil);
+      abilities.innerHTML = "abilities: "+ ableString;
+      var ableString = "";
+      for (var i = 0; i < that.abil.length; i++) {
+        if (i==that.abil.length-1) {
+            ableString += that.abil[i]+"!"
+        }else{
+          ableString += that.abil[i]+", "
+        }
+      }
+      // for (var i = 0; i <5; i++) {
+      //   that.moves.push()
+      // }
     }
   })
  }
@@ -73,6 +82,16 @@ next.addEventListener('click',function() {
   stat_hp.innerHTML = "hp: " + trainer[count].hp
   stat_att.innerHTML = "attack: " + trainer[count].att
   stat_def.innerHTML = "defense: " + trainer[count].def
+  // console.log(that.abil);
+  var ableString = "";
+  for (var i = 0; i < trainer[count].abil.length; i++) {
+    if (i==trainer[count].abil.length-1) {
+        ableString += trainer[count].abil[i]+"!"
+    }else{
+      ableString += trainer[count].abil[i]+", "
+    }
+  }
+  abilities.innerHTML ="abilities: " + ableString;
 })
 
 back.addEventListener('click', function() {
@@ -88,96 +107,13 @@ back.addEventListener('click', function() {
   stat_hp.innerHTML = "hp: " + trainer[count].hp
   stat_att.innerHTML = "attack: " + trainer[count].att
   stat_def.innerHTML = "defense: " + trainer[count].def
-})
 
-
-
-
-
-
-
-// class Mewto extends Pokemon {
-//   constructor(hp, att, def, abil) {
-//     super(hp, att, def, abil)
-//   }
-//
-//   $.ajax({url:"https://fizal.me/pokeapi/api/150.json",
-//     success: function(pokemonInfo) {
-//       console.log(hp);
-//     }
-//
-// }
-
-
-// // function mewtwo() {
-// //   $.ajax({url:"https://fizal.me/pokeapi/api/150.json",
-// //   success: function(response) {
-// //     hookImage(response,mew_img)
-// //     // console.log("My name is " + response.name);
-// //     // var mewName = response.name
-// //     // console.log(mewName);
-// //     // route to hp
-// //     console.log(response.stats[5].stat.name +": "+response.stats[5].base_stat);
-// //     // route to attack
-// //     console.log("attack: "+response.stats[4].base_stat);
-// //     // route to defense
-// //     console.log("defense: "+response.stats[3].base_stat);
-// //     // route to abilities
-// //     console.log("abilities: "+response.abilities[0].ability.name +", " + response.abilities[1].ability.name );
-// //     console.log(response);
-// //     mew_hp.innerHTML= response.stats[5].stat.name +": "+response.stats[5].base_stat
-// //     mew_att.innerHTML = ("attack: "+response.stats[4].base_stat);
-// //     mew_def.innerHTML = ("defense: "+response.stats[3].base_stat);
-// //   }
-// //   })
-// //
-// // }
-//
-// mewtwo()
-function hookImage(x,pokemonNames) {
-  pokemonNames.style.backgroundImage = "url(" + x.sprites.front_default + ")"
-  pokemonNames.style.backgroundSize = '100% 100%'
-}
-//
-// function macchamp() {
-//   $.ajax({url:"https://fizal.me/pokeapi/api/68.json",
-//   success: function(response) {
-//     hookImage(response, macchampImg)
-//     console.log(response);
-//     // console.log(response.sprites.front_default);
-//     console.log(response.name);
-//     // route to hp
-//     console.log("hp: "+response.stats[5].base_stat);
-//     // route to attack
-//     console.log("attack: "+response.stats[4].base_stat);
-//     // route to defense
-//     console.log("defense: "+response.stats[3].base_stat);
-//     console.log("abilities: "+response.abilities[0].ability.name +", " + response.abilities[1].ability.name );
-//
-//   }
-//   })
-// }
-//
-// macchamp()
-
-
-// function mightyena() {
-//   $.ajax({url:"https://fizal.me/pokeapi/api/262.json",
-//   success: function(response) {
-//     hookImage(response,mightImg)
-//     // console.log(response.sprites.front_default);
-//     console.log(response.name);
-//     // console.log(response.sprites.front_default);
-//     // route to hp
-//     console.log("hp: "+response.stats[5].base_stat);
-//     // route to attack
-//     console.log("attack: "+response.stats[4].base_stat);
-//     // route to defense
-//     console.log("defense: "+response.stats[3].base_stat);
-//     console.log("abilities: "+response.abilities[0].ability.name +", " + response.abilities[1].ability.name );
-//     // var frontpic = response.sprites.front_default
-//   }
-//   })
-// }
-
-// mightyena()
+  var ableString = "";
+  for (var i = 0; i < trainer[count].abil.length; i++) {
+    if (i==trainer[count].abil.length-1) {
+        ableString += trainer[count].abil[i]+"!"
+    }else{
+      ableString += trainer[count].abil[i]+", "
+    }
+  }
+  abilities.innerHTML ="abilities: " + ableString;})
