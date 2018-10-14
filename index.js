@@ -1,7 +1,7 @@
 // varibales for each from html //
 
 var poke_name = document.getElementById('name')
-var poke_img = document.getElementById('img')
+var poke_img = document.getElementById('image')
 var stat_hp = document.getElementById('hp')
 var stat_att = document.getElementById('at')
 var stat_def = document.getElementById('def')
@@ -42,7 +42,7 @@ class Pokemon {
       that.att = pokemonInfo.stats[4].base_stat
       that.def = pokemonInfo.stats[3].base_stat
       that.img = pokemonInfo.sprites.front_default
-      
+
       // loop through abilities array and then moves array and give name
       for(let i = 0;i<pokemonInfo.abilities.length;i++){
         that.abil.push(pokemonInfo.abilities[i].ability.name)

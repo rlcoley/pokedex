@@ -1,5 +1,47 @@
-#img{
-  border: 10px ridge;
-  height: 200px;
-  width: 200px;
+html{
+  background-image: url(images/back.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #7DAD71
+}
+
+/* h2{
+  border-top: 2px solid;
+  width: 10vh;
+} */
+
+#image{
+  border: 10px ridge gold;
+  height: 100px;
+  width: 150px;
+  background-color: gold;
+  margin-left: 50px;
+}
+
+#next{
+  position: relative;
+  left: 83vh;
+  color: red;
+}
+
+#back{
+  position: relative;
+  left: 56vh;
+  top: 2vh;
+  color: blue;
+}
+.wrapper{
+  font-family: 'Anton', sans-serif;
+  background-color:yellow;
+  border: 10px solid	#FDD124;
+  border-radius: 2%;
+  height: 40vh;
+  width: 30vh;
+  position: relative;
+  left: 35%;
+}
+
+.text{
+  font-size: 85%;
+  margin-left: 20%;
 }
